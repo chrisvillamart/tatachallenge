@@ -23,14 +23,9 @@ public class TipoCambioService implements ITipoCambioService{
 			Double factor = tipoCambioRepository.getFactor(monedaOrigen, monedaDestino);
 			 
 			tipoCambioDTO.setTipoCambio(factor); 
-			if(factor == 0) {
-				result.setCode(0);
-				result.setMessage("No se encuentra el tipo de cambio indicado");
-			}else {
-				result.setCode(1);
-				result.setMessage("Tipo de cambio encontrado"); 
-				tipoCambioDTO.setMontoTipoCambio( tipoCambioDTO.getMonto() * factor);
-			}  
+			result.setCode(1);
+			result.setMessage("Tipo de cambio encontrado"); 
+			tipoCambioDTO.setMontoTipoCambio( tipoCambioDTO.getMonto() * factor);
 			
 			result.setResult(tipoCambioDTO); 
 		}catch(Exception e) {
@@ -43,15 +38,29 @@ public class TipoCambioService implements ITipoCambioService{
 
 	@Override
 	public ResultDTO insertTipoCambio(TipoCambioDTO tipoCambioDTO) {
-		TipoCambio _tipoCambio = tipoCambioRepository
-				.save(new TipoCambio(tipoCambioDTO.getMonedaOrigen(),tipoCambioDTO.getMonedaDestino(), tipoCambioDTO.getTipoCambio()));
 		
+		TipoCambio _tipoCambioUpdate = tipoCambioRepository.findByMonedaOrigenAndMonedaDestino(tipoCambioDTO.getMonedaOrigen(), tipoCambioDTO.getMonedaDestino());
+
 		ResultDTO result = new ResultDTO();
-		result.setCode(0);
-		result.setMessage("Tipo de cambio Insertado");
-		result.setResult(_tipoCambio);
 		
+		if(_tipoCambioUpdate != null) {
+
+			_tipoCambioUpdate.setTipoCambio(tipoCambioDTO.getTipoCambio()); 
+			tipoCambioRepository.save(_tipoCambioUpdate);
+			result.setCode(1);
+			result.setMessage("Tipo de cambio Actualizado");
+			result.setResult(_tipoCambioUpdate);
+		}else {
+			 
+			TipoCambio _tipoCambio = tipoCambioRepository
+					.save(new TipoCambio(tipoCambioDTO.getMonedaOrigen(),tipoCambioDTO.getMonedaDestino(), tipoCambioDTO.getTipoCambio()));
+			result.setCode(1);
+			result.setMessage("Tipo de cambio Insertado");
+			result.setResult(_tipoCambio);
+		}
+		  
 		return result;
 	}
+ 
  
 }

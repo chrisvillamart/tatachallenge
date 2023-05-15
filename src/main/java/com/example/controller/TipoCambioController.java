@@ -30,7 +30,6 @@ public class TipoCambioController {
     	ResultDTO resultadoInsert = tipoCambioService.insertTipoCambio(tipoCambioDTO); 
         return ResponseEntity.ok(resultadoInsert);
     }
-    
-    
+     
     
 }

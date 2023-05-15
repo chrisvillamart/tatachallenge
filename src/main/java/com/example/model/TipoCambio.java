@@ -22,13 +22,42 @@ public class TipoCambio {
     @Column(name = "tipoCambio")
     private Double tipoCambio;
 
+    
+	public TipoCambio() {
+	}
+
 	public TipoCambio(String monedaOrigen, String monedaDestino, Double tipoCambio) {
 		super();
 		this.tipoCambio = tipoCambio;
 		this.monedaOrigen = monedaOrigen;
 		this.monedaDestino = monedaDestino;
 	}
-    
-    
+
+	public String getMonedaOrigen() {
+		return monedaOrigen;
+	}
+
+	public void setMonedaOrigen(String monedaOrigen) {
+		this.monedaOrigen = monedaOrigen;
+	}
+
+	public String getMonedaDestino() {
+		return monedaDestino;
+	}
+
+	public void setMonedaDestino(String monedaDestino) {
+		this.monedaDestino = monedaDestino;
+	}
+
+	public Double getTipoCambio() {
+		return tipoCambio;
+	}
+
+	public void setTipoCambio(Double tipoCambio) {
+		this.tipoCambio = tipoCambio;
+		
+	}
+ 
+  
 
 }

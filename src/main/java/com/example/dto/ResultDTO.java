@@ -1,9 +1,9 @@
 package com.example.dto;
 
 public class ResultDTO {
-    int code;
-    String message;
-    Object Result;
+	private int code;
+	private String message;
+	private Object Result;
     
 	public int getCode() {
 		return code;

@@ -8,5 +8,6 @@ public interface ITipoCambioService {
 	ResultDTO getTipoCambio(String monedaOrigen, String monedaDestino, Double monto);
 
 	ResultDTO insertTipoCambio(TipoCambioDTO tipoCambioDTO);
+ 
 
 }

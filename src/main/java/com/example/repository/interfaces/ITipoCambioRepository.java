@@ -11,4 +11,7 @@ import com.example.model.TipoCambio;
 public interface ITipoCambioRepository extends JpaRepository<TipoCambio,Double> {
     @Query("SELECT t.tipoCambio FROM TipoCambio t WHERE t.monedaOrigen = :monedaOrigen AND t.monedaDestino = :monedaDestino")
     Double getFactor(@Param("monedaOrigen") String monedaOrigen, @Param("monedaDestino") String monedaDestino);
+    
+    TipoCambio findByMonedaOrigenAndMonedaDestino(String monedaOrigen, String monedaDestino);
+
 }
